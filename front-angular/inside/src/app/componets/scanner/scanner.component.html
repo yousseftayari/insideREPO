@@ -1,0 +1,8 @@
+<h2>Scanner QR / Code-barres</h2>
+
+<zxing-scanner
+    [enable]="true"
+  (scanSuccess)="onCodeResult($event)">
+</zxing-scanner>
+
+<p *ngIf="scannedResult">Résultat: {{ scannedResult }}</p>

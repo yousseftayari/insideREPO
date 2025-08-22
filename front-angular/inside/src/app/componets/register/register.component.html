@@ -1,0 +1,130 @@
+<div class="register-container">
+  <div class="register-box">
+    <div class="text-center mb-4">
+      <img src="logo_electrodoc.png" alt="Logo ElectroDoc" class="logo mb-3">
+      <h2>Créer un compte</h2>
+      <p class="text-muted">Rejoignez ElectroDoc pour gérer vos documents</p>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+      <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+      <i class="fas fa-exclamation-triangle me-2"></i>{{ errorMessage }}
+      <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+    </div>
+
+    <!-- Register Form -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      
+      <div class="mb-3">
+        <label for="username" class="form-label">
+          <i class="fas fa-user me-1"></i>Nom d'utilisateur
+        </label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('username') }"
+          placeholder="Entrez votre nom d'utilisateur"
+          required
+        />
+        <div *ngIf="isFieldInvalid('username')" class="invalid-feedback">
+          {{ getErrorMessage('username') }}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">
+          <i class="fas fa-envelope me-1"></i>Adresse email
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('email') }"
+          placeholder="Entrez votre adresse email"
+          required
+        />
+        <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock me-1"></i>Mot de passe
+        </label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('password') }"
+          placeholder="Entrez votre mot de passe"
+          required
+        />
+        <div *ngIf="isFieldInvalid('password')" class="invalid-feedback">
+          {{ getErrorMessage('password') }}
+        </div>
+        <div class="form-text">Le mot de passe doit contenir au moins 6 caractères</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="confirmPassword" class="form-label">
+          <i class="fas fa-lock me-1"></i>Confirmer le mot de passe
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('confirmPassword') }"
+          placeholder="Confirmez votre mot de passe"
+          required
+        />
+        <div *ngIf="isFieldInvalid('confirmPassword')" class="invalid-feedback">
+          {{ getErrorMessage('confirmPassword') }}
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-lg" 
+          [disabled]="!registerForm.valid || isSubmitting"
+        >
+          <span *ngIf="!isSubmitting">
+            <i class="fas fa-user-plus me-2"></i>Créer mon compte
+          </span>
+          <span *ngIf="isSubmitting">
+            <i class="fas fa-spinner fa-spin me-2"></i>Création en cours...
+          </span>
+        </button>
+        
+        <button 
+          type="button" 
+          class="btn btn-outline-secondary" 
+          (click)="resetForm()"
+          [disabled]="isSubmitting"
+        >
+          <i class="fas fa-undo me-2"></i>Réinitialiser
+        </button>
+      </div>
+    </form>
+
+    <div class="text-center mt-4">
+      <p class="mb-0">
+        Déjà un compte ? 
+        <a routerLink="/login" class="text-decoration-none">
+          <i class="fas fa-sign-in-alt me-1"></i>Se connecter
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
