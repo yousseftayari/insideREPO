@@ -1,0 +1,7 @@
+angular
+
+- ng serve --host 0.0.0.0 --port 4200 --allowed-hosts all
+
+- (dans le cmd )ngrok http 4200 
+ 
+ouvrir forwarding dans le telephone     ex( https://0a35c4c00f45.ngrok-free.app
